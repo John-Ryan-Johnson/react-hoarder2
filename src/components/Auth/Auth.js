@@ -1,4 +1,6 @@
 import React from 'react';
+import firebase from 'firebase/app';
+import 'firebase/auth';
 
 class Auth extends React.Component {
   loginClickEvent = (e) => {
@@ -10,7 +12,7 @@ class Auth extends React.Component {
   render() {
     return (
       <div className="Auth">
-        <button className="btn btn-danger" onClick={this.loginClickEvent}>Google Auth</button>
+        <button className="btn btn-primary" onClick={this.loginClickEvent}>Google Auth</button>
       </div>
     );
   }
