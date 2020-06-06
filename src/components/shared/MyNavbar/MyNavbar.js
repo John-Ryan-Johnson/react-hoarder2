@@ -1,5 +1,14 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink as RRNavLink } from 'react-router-dom';
+import {
+  Collapse,
+  Navbar,
+  NavbarToggler,
+  NavbarBrand,
+  Nav,
+  NavItem,
+  NavLink,
+} from 'reactstrap';
 import PropTypes from 'prop-types';
 import firebase from 'firebase/app';
 import 'firebase/auth';
@@ -8,7 +17,11 @@ import './MyNavbar.scss';
 
 class MyNavbar extends React.Component {
   static propTypes = {
-    authed: PropTypes.bool,
+    authed: PropTypes.bool.isRequired,
+  }
+
+  state = {
+    isOpen: false,
   }
 
   logMeOut = (e) => {
@@ -16,48 +29,48 @@ class MyNavbar extends React.Component {
     firebase.auth().signOut();
   }
 
+  toggle = () => {
+    this.setState({ isOpen: !this.state.isOpen });
+  }
+
   render() {
-    const { authed } = this.props;
+    const { isOpen } = this.state;
 
     const buildNavbar = () => {
+      const { authed } = this.props;
       if (authed) {
         return (
-          <ul className="navbar-nav ml-auto">
-            <li className="nav-item">
-              <Link className="nav-link" to="/home">Home</Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/stuff">My Stuff</Link>
-            </li>
-            <li className="nav-item">
-              <Link className="nav-link" to="/stuff/new">New</Link>
-            </li>
-            <li className="nav-item">
-              <button className="nav-link btn btn-danger" onClick={this.logMeOut}>Logout</button>
-            </li>
-          </ul>
+          <Nav className="ml-auto" navbar>
+            <NavItem>
+              <NavLink tag={RRNavLink} to='/home'>Home</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink tag={RRNavLink} to='/stuff'>My Stuff</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink tag={RRNavLink} to='/stuff/new'>New</NavLink>
+            </NavItem>
+            <NavItem>
+              <NavLink className="logout" onClick={this.logMeOut}>Logout</NavLink>
+            </NavItem>
+          </Nav>
         );
       }
-
-      return (<ul className="navbar-nav ml-auto"></ul>);
+      return <Nav className="ml-auto" navbar></Nav>;
     };
 
     return (
       <div className="MyNavbar">
-        <nav className="navbar navbar-expand-lg navbar-dark bg-dark">
-          <Link className="navbar-brand" to="/home">React Hoarder</Link>
-          <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-            <span className="navbar-toggler-icon"></span>
-          </button>
-
-          <div className="collapse navbar-collapse" id="navbarSupportedContent">
-            { buildNavbar() }
-          </div>
-        </nav>
+        <Navbar color="dark" dark expand="md">
+          <NavbarBrand href="/">React Hoarder</NavbarBrand>
+          <NavbarToggler onClick={this.toggle} />
+          <Collapse isOpen={isOpen} navbar>
+            {buildNavbar()}
+          </Collapse>
+        </Navbar>
       </div>
     );
   }
 }
-
 
 export default MyNavbar;
