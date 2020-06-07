@@ -9,17 +9,11 @@ class SingleStuff extends React.Component {
   };
 
   componentDidMount() {
-    const { itemId } = this.props.match.params.itemId;
-    this.getItem(itemId);
+    const { itemId } = this.props.match.params;
+    itemsData.getSingleItem(itemId)
+      .then((response) => this.setState({ item: response.data }))
+      .catch((err) => console.error('unable to get single item: ', err));
   }
-
-  getItem = (itemId) => {
-    itemsData.getSingleItemById(itemId)
-      .then((items) => {
-        this.setState({ items });
-      })
-      .catch((err) => console.error(err));
-  };
 
   render() {
     const { item } = this.state;

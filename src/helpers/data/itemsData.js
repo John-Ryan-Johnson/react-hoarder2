@@ -22,6 +22,6 @@ const getAllItems = () => new Promise((resolve, reject) => {
     });
 });
 
-const getSingleItemById = (itemId) => axios.get(`${baseUrl}/items/${itemId}.json`);
+const getSingleItem = (itemId) => axios.get(`${baseUrl}/items/${itemId}.json`);
 
-export default { getAllItems, getSingleItemById };
+export default { getAllItems, getSingleItem };
