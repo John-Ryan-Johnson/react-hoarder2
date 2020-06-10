@@ -16,7 +16,7 @@ import MyNavbar from '../components/shared/MyNavbar/MyNavbar';
 import Auth from '../components/pages/Auth/Auth';
 import Home from '../components/pages/Home/Home';
 import MyStuff from '../components/pages/MyStuff/MyStuff';
-import New from '../components/shared/New/New';
+import New from '../components/pages/New/New';
 import Edit from '../components/pages/Edit/Edit';
 import SingleStuff from '../components/pages/SingleStuff/SingleStuff';
 

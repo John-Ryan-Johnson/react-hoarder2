@@ -22,7 +22,7 @@ class SingleStuff extends React.Component {
       <div className='SingleStuff'>
         <h1 className='mt-3'>Single Stuff</h1>
         <div className='row justify-content-center'>
-          <div className='card col-6'>
+          <div className='card col-6 mb-5'>
             <img src={item.itemImage} alt={item.itemName} className='card-img-top' />
             <div className="card-body">
               <h5 className="card-title">{item.itemName}</h5>
