@@ -18,10 +18,16 @@ class MyStuff extends React.Component {
     this.getItems();
   }
 
+  removeItem = (itemId) => {
+    itemsData.deleteItem(itemId)
+      .then(() => this.getItems())
+      .catch((err) => console.error('unable to delete item: ', err));
+  }
+
   render() {
     const { items } = this.state;
     const buildItemList = items.map((item) => (
-      <StuffList key={item.id} item={item} />
+      <StuffList key={item.id} item={item} removeItem={this.removeItem} />
     ));
 
     return (
