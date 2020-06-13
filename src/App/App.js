@@ -64,15 +64,15 @@ class App extends React.Component {
         <BrowserRouter>
           <React.Fragment>
             <MyNavbar authed={authed}/>
-            <div className="container d-flex justify-content-center">
-              <div className="row">
+            <div className="container">
+              <div className="row justify-content-center">
                 <Switch>
-                  <PrivateRoute path='/home' exact component={Home} authed={authed} />
+                  <PrivateRoute path='/home' component={Home} authed={authed} />
                   <PrivateRoute path='/stuff' exact component={MyStuff} authed={authed} />
-                  <PrivateRoute path='/stuff/new' exact component={New} authed={authed} />
-                  <PrivateRoute path='/12345/edit' exact component={Edit} authed={authed} />
+                  <PrivateRoute path='/stuff/new' component={New} authed={authed} />
+                  <PrivateRoute path='/edit/:itemId' component={Edit} authed={authed} />
                   <PrivateRoute path='/stuff/:itemId' exact component={SingleStuff} authed={authed} />
-                  <PublicRoute path='/auth' exact component={Auth} authed={authed} />
+                  <PublicRoute path='/auth' component={Auth} authed={authed} />
                   <Redirect from="*" to="/home"/>
                 </Switch>
               </div>
